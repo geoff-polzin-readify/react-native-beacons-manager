@@ -202,7 +202,7 @@ public class BeaconsAndroidModule extends ReactContextBaseJavaModule implements 
       for (Region region: mBeaconManager.getMonitoredRegions()) {
           WritableMap map = new WritableNativeMap();
           map.putString("identifier", region.getUniqueId());
-          map.putString("uuid", region.getId1().toString());
+          map.putString("uuid", region.getId1() != null ? region.getId1().toString() : "");
           map.putInt("major", region.getId2() != null ? region.getId2().toInt() : 0);
           map.putInt("minor", region.getId3() != null ? region.getId3().toInt() : 0);
           array.pushMap(map);
@@ -216,7 +216,7 @@ public class BeaconsAndroidModule extends ReactContextBaseJavaModule implements 
       for (Region region: mBeaconManager.getRangedRegions()) {
           WritableMap map = new WritableNativeMap();
           map.putString("region", region.getUniqueId());
-          map.putString("uuid", region.getId1().toString());
+          map.putString("uuid", region.getId1() != null ? region.getId1().toString() : "");
           array.pushMap(map);
       }
       callback.invoke(array);
@@ -351,7 +351,7 @@ public class BeaconsAndroidModule extends ReactContextBaseJavaModule implements 
       WritableArray a = new WritableNativeArray();
       for (Beacon beacon : beacons) {
           WritableMap b = new WritableNativeMap();
-          b.putString("uuid", beacon.getId1().toString());
+          b.putString("uuid", region.getId1() != null ? region.getId1().toString() : "");
           if (beacon.getIdentifiers().size() > 2) {
               b.putInt("major", beacon.getId2().toInt());
               b.putInt("minor", beacon.getId3().toInt());
